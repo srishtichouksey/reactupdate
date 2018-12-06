@@ -8,13 +8,14 @@ export default class Header extends Component {
           <div id="main_div">
           	<div id="header">
           	    <span>Ecommerce !!!</span>
-             	</div>
-               <Link to="/users"><span Class="link">UserDetails</span>
-               </Link>
-               <Link to="/addProduct"><span Class="link">AddProduct</span>
-               </Link>
-               <Link to="/productdetail"><span Class="link">ProductDetail</span>
-               </Link>
+                   <Link to="/users"><span className="link">UserDetails</span>
+                   </Link>
+                   <Link to="/addProduct"><span className="link">AddProduct</span>
+                   </Link>
+                   <Link to="/productdetail"><span className="link">ProductDetail</span>
+                  
+                   </Link>
+               </div>
           </div>
 		);
 	}

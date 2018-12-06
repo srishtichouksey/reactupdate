@@ -15,3 +15,21 @@
   cursor: pointer;
   font-size: 12px;
 }
+
+fieldset{
+ border : none;
+}
+
+#user_table{
+  margin: 5% 30%;
+
+}
+
+#user_table td{
+   padding : 10px 10px;
+}
+
+.editbutton {
+  padding : 5px 20px;
+  background-color: #00FFFF;
+}

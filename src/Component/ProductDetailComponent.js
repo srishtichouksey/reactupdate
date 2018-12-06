@@ -15,12 +15,11 @@ export default class ProductDetail extends Component {
 		return(
 			<div>
 				{
-
 				this.props.categories.map((data) => {
         		    return (
         		    	<div  key={data.id}>
             			    <h3 >{data.Type} </h3>
-            			    <img  src= {baseurl+data.image} alt="image" />
+            			    <img  src= {baseurl+data.image} alt="women" />
             			</div>
         			);
 					})

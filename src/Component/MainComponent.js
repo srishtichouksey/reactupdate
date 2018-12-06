@@ -4,7 +4,8 @@ import AboutUs from './AboutUsComponent';
 import AddProduct from './AddProductComponent';
 import Users from './UserComponent';
 import Header from './HeaderComponent';
-import {Route , Switch, NavLink} from 'react-router-dom';
+import EditDetail from './EditDetailComponent';
+import {Route , Switch, Redirect} from 'react-router-dom';
 import { baseurl } from '../shared/baseurl';
 
 
@@ -20,18 +21,6 @@ export default class Main extends Component {
 	}
 
 	componentDidMount() {
-		//  fetch(baseurl + 'Category')
-		// .then((response) => {
-		// 	 return response.json();
-		// 	// console.log('response:', response);
-			
-		// })
-		// .then((data) => {
-		// 	this.setState({
-		// 		details: data
-		// 	});
-		// });		
-		//let arrayusers = [];
 		fetch(baseurl+'users')
 		.then((response) =>{
 			return response.json();
@@ -42,8 +31,6 @@ export default class Main extends Component {
              showusers : data
         });
 		});
-        
-       
 	}
 
 	addUser(product) {
@@ -81,7 +68,8 @@ export default class Main extends Component {
 				    <Route path="/productdetail" component={() => <ProductDetail categories={this.state.details} />} />
 				    <Route path="/addProduct" component = {() => <AddProduct addusers={this.addUser}/>} />
 				    <Route path="/aboutus" component={AboutUs} />
-				    <Route path="/users" component={() =>  <Users sendusers={this.state.showusers} />} />
+				    <Route exact path="/users" component={() =>  <Users sendusers={this.state.showusers} />} />
+					
 				 </Switch>
 			</div>
 		);

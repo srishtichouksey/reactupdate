@@ -5,49 +5,102 @@ export default class EditDetailComponent extends Component {
 	constructor(){
 		super();
         this.state = {
-        	editUserData : []
+        	editUserData : [],
+        	gender : [
+        		male => false,
+        		female => true
+        	]
+
         }
 		this.handleSubmit = this.handleSubmit.bind(this);
+		//this.handleChange = this.handleChange.bind(this); 
+		this.handleCancel = this.handleCancel.bind(this);
 	}
 
 	handleSubmit(event) {
-		console.log(this.refs.pincode.value);
 		this.setState({editUserData:{
 			id : this.props.data.id,
-            f_name : this.refs.f_name.value,
-            l_name : this.refs.l_name.value,
-            address : this.refs.address.value,
-            city : this.refs.city.value,
-            pincode : this.refs.pincode.value,
+            f_name : this.firstname.value,
+            l_name : this.lastname.value,
+            address : this.address.value,
+            city : this.city.value,
+            pincode : this.pincode.value,
 		}}, function(){
 			this.props.updateuser(this.state.editUserData)
 		});
-		console.log(this.state.editUserData);
+		event.preventDefault();
+	}
+
+	handleCancel(event){
+		this.setState({
+			id : this.props.data.id,
+			f_name : this.props.data.firstname,
+			l_name : this.props.data.lastname,
+            address : this.props.data.address,
+            city : this.props.data.city,
+            pincode : this.props.data.pincode
+		});
 		event.preventDefault();
 	}
 
 	render() {
 		return(
 			<div>
+				<div>USER DETAIL FORM</div>
 				<form>
 					<fieldset>
-						FirstName : <input type="text" id="f_name" ref="f_name" defaultValue={this.props.data.firstname} placeholder="Firstname" />
+						FirstName :
+						<input type="text" id="f_name" 
+							ref={(input) =>{this.firstname = input}} 
+							defaultValue={this.props.data.firstname} 
+							placeholder="Firstname" />
 					</fieldset>
 					<fieldset>
-					    LastName : <input type="text" ref="l_name" defaultValue={this.props.data.lastname} placeholder="LastName" />
+					    LastName : <input 
+					    	type="text" 
+					    	ref={(input) =>{this.lastname = input}}
+					    	defaultValue={this.props.data.lastname}
+					        placeholder="LastName" />
 					</fieldset>
 					<fieldset>
-						Address : <input type="textbox" ref="address" defaultValue={this.props.data.address}  placeholder="Address"/>
+					    Gender : Male <input 
+					    			type="radio" 
+					    			value={this.state.gender.male}
+					    			defaultChecked={this.props.data.gender === "male"} 
+					    			name="radiobutton"/> 
+					            Female <input type="radio" 
+					            	feaultChecked={this.props.data.gender === "female"}  
+					            	name="radiobutton" />
 					</fieldset>
 					<fieldset>
-                        City : <input type="text" ref="city" defaultValue={this.props.data.city} placeholder="City" />
+						Address : 
+						<input type="textbox" 
+						        ref={(input) =>{this.address = input}} 
+						        defaultValue={this.props.data.address}  
+						        placeholder="Address"/>
 					</fieldset>
 					<fieldset>
-						Pincode : <input type="text" ref="pincode" defaultValue={this.props.data.pincode} placeholder="Pincode"/>
+                        City : <input  type="text" 
+                                   ref={(input) =>{this.city = input}} 
+                                   defaultValue={this.props.data.city} 
+                                   placeholder="City" />
 					</fieldset>
 					<fieldset>
-					     <input type="submit" value="UPDATE" onClick={this.handleSubmit}/>   
-					 </fieldset>
+						Pincode : <input type="text" 
+						            ref={(input) => {this.pincode = input}} 
+						            defaultValue={this.props.data.pincode} 
+						            placeholder="Pincode"/>
+					</fieldset>
+					<fieldset>
+					    <input type="submit"
+					        value="UPDATE"
+					        onClick={this.handleSubmit}
+					    />
+					     <input type="submit"
+					        value="Cancel"
+					        onClick={this.handleCancel}
+					    />   
+					</fieldset>
 				</form>
 			</div>
 		);
