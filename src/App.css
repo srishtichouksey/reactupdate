@@ -1,14 +1,17 @@
-#product{
-  background: #F9F9F9;
-  padding: 25px;
-  margin: 150px 0;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+#header{
+  padding : 40px 40px;
+  border: 2px solid black;
+  font-family: verdana;
+  font-size : 25px;
+  background-color: #fff;
 }
 
-fieldset {
-  border: medium none !important;
-  margin: 0 0 10px;
-  min-width: 100%;
-  padding: 0;
-  width: 100%;
+#main_div .link{
+  margin-top: 40px;
+  margin-left: 50px;
+  background-color: #00FFFF;
+  padding: 20px 30px;
+  cursor: pointer;
+  font-size: 12px;
 }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ProductDetail from './ProductDetailComponent';
 import AboutUs from './AboutUsComponent';
 import AddProduct from './AddProductComponent';
+import Users from './UserComponent';
+import Header from './HeaderComponent';
 import {Route , Switch, NavLink} from 'react-router-dom';
 import { baseurl } from '../shared/baseurl';
 
@@ -11,42 +13,75 @@ export default class Main extends Component {
 	constructor() {
 		super();
 		this.state = {
-			details : []
+			details : [],
+			showusers : []
 		}
+		this.addUser = this.addUser.bind(this);
 	}
 
 	componentDidMount() {
-		 fetch(baseurl + 'Category')
-		.then((response) => {
-			 return response.json();
-			// console.log('response:', response);
+		//  fetch(baseurl + 'Category')
+		// .then((response) => {
+		// 	 return response.json();
+		// 	// console.log('response:', response);
 			
+		// })
+		// .then((data) => {
+		// 	this.setState({
+		// 		details: data
+		// 	});
+		// });		
+		//let arrayusers = [];
+		fetch(baseurl+'users')
+		.then((response) =>{
+			return response.json();
 		})
-		.then((data) => {
-			this.setState({
-				details: data
-			});
-		});		
+		.then((data) =>{
+             //arrayusers.push(data);
+              this.setState({
+             showusers : data
+        });
+		});
+        
+       
 	}
 
+	addUser(product) {
+		//console.log(JSON.stringify(product));
+		 fetch(baseurl+'Products',{
+		 	method: "POST",
+		 	body: JSON.stringify(product),
+		 	headers: {
+		 		"Content-Type" : "application/json"
+		 	},
+		 	credentials: "same-origin"
+		 })
+		 .then(response => response.json());
+	}
 
+	// fetchUsers() {
+ //        let arrayusers = [];
+	// 	fetch(baseurl+'users')
+	// 	.then((response) =>{
+	// 		return response.json();
+	// 	})
+	// 	.then((data) =>{
+ //             arrayusers.push(data);
+	// 	});
+        
+ //        this.setState({
+ //             showusers : arrayusers
+ //        });
+	// }
 	render() {
 		return (
 			<div>
-				
-				<NavLink to="/productdetail">
-					<span>ProductDetail</span>
-				</NavLink>
-				<NavLink to="/aboutus">
-					<span>ContactUs</span>
-				</NavLink>
-				<NavLink to="/addProduct">
-					<span>AddProduct</span>
-				</NavLink>
+			    <Header />
 				<Switch>
 				    <Route path="/productdetail" component={() => <ProductDetail categories={this.state.details} />} />
-				    <Route path="/addProduct" component = {AddProduct} />
+				    <Route path="/addProduct" component = {() => <AddProduct addusers={this.addUser}/>} />
 				    <Route path="/aboutus" component={AboutUs} />
+				    <Route path="/users" component={() =>  <Users sendusers={this.state.showusers} />} />
 				 </Switch>
 			</div>
 		);
